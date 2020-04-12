@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.vue": "vue"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "emmet.includeLanguages": {
+        "vue": "html"
+    },
+    "editor.tabSize": 2
+}

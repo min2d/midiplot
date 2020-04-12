@@ -1,0 +1,96 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    muMidi
+  </title>
+  <link href="./style.css" id="stylesheet" rel="stylesheet" type="text/css">
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+</head>
+
+<body>
+  <section class="hero is-info is-fullheight" id="app">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+          <h1 class="title">
+            midi plotter
+          </h1>
+          <h2 class="subtitle">
+            midi plotter
+          </h2>
+          <div class="box">
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input" type="file" name="resume" accept="audio/midi" id="file-input"
+                  @input="fileChanged">
+                <span class="file-cta">
+                  <!-- <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span> -->
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+              </label>
+            </div>
+            <div>
+              <div class="field has-addons">
+                <div>1ページ</div>
+                <div class="control">
+                  <input class="input" type="number" v-model="beatsPerBar">
+                </div>
+                <div>拍 ×</div>
+                <div class="control">
+                  <input class="input" type="number" v-model="barsPerPage">
+                </div>
+                <div>小節</div>
+              </div>
+              <div class="field has-addons">
+                <div>対象Track</div>
+                <div class="select">
+                  <select v-model="trackIndex">
+                    <option v-for="i in Object.keys(tracks)" :value="i">{{Number(i)+1}}</option>
+                  </select>
+                </div>
+                <div class="control">
+                  <button class="button" @click="preview">preview</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div>preview</div>
+              <canvas id="preview" width="500" height="300">preview area</canvas>
+            </div>
+
+            <div class="has-background-warning is-size-7">
+              <p>debug</p>
+              <p>
+                beatsPerPage:{{beatsPerPage}}
+              </p>
+              <p>
+                ticksPerPage:{{ticksPerPage}}
+              </p>
+              <p>
+                trackIndex:{{trackIndex}}
+              </p>
+              <p>
+                notes:{{notes}}
+              </p>
+              <p>
+                plots:{{plots}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <script src="./bundle.js"></script>
+
+</body>
+
+</html>
