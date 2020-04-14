@@ -6,14 +6,13 @@
     muMidi
   </title>
   <link href="./style.css" id="stylesheet" rel="stylesheet" type="text/css">
-  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 </head>
 
 <body>
   <section class="hero is-info is-fullheight" id="app">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-6 is-offset-3">
+        <div class="column is-8 is-offset-2">
           <h1 class="title">
             midi plotter
           </h1>
@@ -46,14 +45,20 @@
                   <input class="input" type="number" v-model="barsPerPage">
                 </div>
                 <div>小節</div>
+
               </div>
               <div class="field has-addons">
+                <div>アートボードサイズ(mm)</div>
+                <div class="control">
+                  <input class="input" type="number" v-model="pageWidth">
+                </div>
                 <div>対象Track</div>
                 <div class="select">
                   <select v-model="trackIndex">
                     <option v-for="i in Object.keys(tracks)" :value="i">{{Number(i)+1}}</option>
                   </select>
                 </div>
+
                 <div class="control">
                   <button class="button" @click="preview">preview</button>
                 </div>
@@ -81,6 +86,9 @@
               </p>
               <p>
                 plots:{{plots}}
+              </p>
+              <p>
+                pagedPlots:{{pagedPlots}}
               </p>
             </div>
           </div>

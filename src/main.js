@@ -31,7 +31,7 @@ var app = new Vue({
       return new Track(track).notes
     },
     plots() {
-      // ページ割TODO
+      // ページ割TODO アートボードサイズ指定TODO インターバル指定TODO
       return this.notes.map(note => {
         return {
           x: (this.pageWidth / this.ticksPerPage) * note.tick,
@@ -40,6 +40,30 @@ var app = new Vue({
           w: (this.pageWidth / this.ticksPerPage) * note.duration
         }
       })
+    },
+    pagedPlots() {
+      let pages = []
+      this.notes.forEach(note => {
+        let page = note.tick / this.ticksPerPage
+        let overflow = note.tick + note.duration - this.ticksPerPage
+        // 3ページまたぐことはないとし、はみ出たブロックを次のページに配置する
+        if (overflow > 0) {
+          const overflowPlot = {
+            x: 0, y: note.noteNumber, h: this.height,
+            w: (this.pageWidth / this.ticksPerPage) * overflow
+          }
+          pages[page + 1] = pages[page + 1] || []
+          pages[page + 1].push(overflowPlot)
+        }
+        const plot = {
+          x: (this.pageWidth / this.ticksPerPage) * note.tick,
+          y: note.noteNumber, h: this.height,
+          w: (this.pageWidth / this.ticksPerPage) * note.duration
+        }
+        pages[page] = pages[page] || []
+        pages[page].push(plot)
+      })
+      return pages
     }
   },
   methods: {
@@ -54,13 +78,16 @@ var app = new Vue({
       reader.readAsBinaryString(e.target.files[0])
     },
     preview() {
-      let stage = new createjs.Stage('preview')
-      this.plots.forEach(plot => {
-        let shape = new createjs.Shape();
-        shape.graphics.beginFill("black").drawRect(plot.x, plot.y, plot.w, plot.h);
-        stage.addChild(shape);
+      let stage = new Stage('preview')
+      this.pagedPlots.forEach(plots => {
+        // こっちで。枠増やす
       })
-      stage.update();
+      this.plots.forEach(plot => {
+        let shape = new Shape()
+        shape.graphics.beginFill("black").drawRect(plot.x, plot.y, plot.w, plot.h)
+        stage.addChild(shape)
+      })
+      stage.update()
     }
   }
 })
