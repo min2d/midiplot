@@ -1,4 +1,4 @@
-/*! bulma.io v0.8.1 | MIT License | github.com/jgthms/bulma */
+/*! bulma.io v0.8.2 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {
   from {
     transform: rotate(0deg); }
@@ -2887,15 +2887,15 @@ a.tag:hover {
   background-color: white;
   border-color: #dbdbdb;
   border-radius: 4px;
-  color: inherit; }
+  color: #363636; }
   .input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder {
-    color: inherit; }
+    color: rgba(54, 54, 54, 0.3); }
   .input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder, .select select::-webkit-input-placeholder {
-    color: inherit; }
+    color: rgba(54, 54, 54, 0.3); }
   .input:-moz-placeholder, .textarea:-moz-placeholder, .select select:-moz-placeholder {
-    color: inherit; }
+    color: rgba(54, 54, 54, 0.3); }
   .input:-ms-input-placeholder, .textarea:-ms-input-placeholder, .select select:-ms-input-placeholder {
-    color: inherit; }
+    color: rgba(54, 54, 54, 0.3); }
   .input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
     border-color: #b5b5b5; }
   .input:focus, .textarea:focus, .select select:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .input:active, .textarea:active, .select select:active, .is-active.input, .is-active.textarea, .select select.is-active {
@@ -4926,25 +4926,23 @@ a.navbar-item,
   .navbar-link {
     align-items: center;
     display: flex; }
-  .navbar-item {
-    display: flex; }
-    .navbar-item.has-dropdown {
-      align-items: stretch; }
-    .navbar-item.has-dropdown-up .navbar-link::after {
-      transform: rotate(135deg) translate(0.25em, -0.25em); }
-    .navbar-item.has-dropdown-up .navbar-dropdown {
-      border-bottom: 2px solid #dbdbdb;
-      border-radius: 6px 6px 0 0;
-      border-top: none;
-      bottom: 100%;
-      box-shadow: 0 -8px 8px rgba(10, 10, 10, 0.1);
-      top: auto; }
-    .navbar-item.is-active .navbar-dropdown, .navbar-item.is-hoverable:focus .navbar-dropdown, .navbar-item.is-hoverable:focus-within .navbar-dropdown, .navbar-item.is-hoverable:hover .navbar-dropdown {
-      display: block; }
-      .navbar.is-spaced .navbar-item.is-active .navbar-dropdown, .navbar-item.is-active .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:focus .navbar-dropdown, .navbar-item.is-hoverable:focus .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:focus-within .navbar-dropdown, .navbar-item.is-hoverable:focus-within .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:hover .navbar-dropdown, .navbar-item.is-hoverable:hover .navbar-dropdown.is-boxed {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0); }
+  .navbar-item.has-dropdown {
+    align-items: stretch; }
+  .navbar-item.has-dropdown-up .navbar-link::after {
+    transform: rotate(135deg) translate(0.25em, -0.25em); }
+  .navbar-item.has-dropdown-up .navbar-dropdown {
+    border-bottom: 2px solid #dbdbdb;
+    border-radius: 6px 6px 0 0;
+    border-top: none;
+    bottom: 100%;
+    box-shadow: 0 -8px 8px rgba(10, 10, 10, 0.1);
+    top: auto; }
+  .navbar-item.is-active .navbar-dropdown, .navbar-item.is-hoverable:focus .navbar-dropdown, .navbar-item.is-hoverable:focus-within .navbar-dropdown, .navbar-item.is-hoverable:hover .navbar-dropdown {
+    display: block; }
+    .navbar.is-spaced .navbar-item.is-active .navbar-dropdown, .navbar-item.is-active .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:focus .navbar-dropdown, .navbar-item.is-hoverable:focus .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:focus-within .navbar-dropdown, .navbar-item.is-hoverable:focus-within .navbar-dropdown.is-boxed, .navbar.is-spaced .navbar-item.is-hoverable:hover .navbar-dropdown, .navbar-item.is-hoverable:hover .navbar-dropdown.is-boxed {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0); }
   .navbar-menu {
     flex-grow: 1;
     flex-shrink: 0; }
@@ -7114,4 +7112,28 @@ label.panel-block {
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
+
+.num-input {
+  width: 75px; }
+
+.row {
+  margin-bottom: 1.25rem; }
+
+.preview {
+  border: 1px solid #aaaaaa;
+}
+
+.tile {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  position: absolute;
+  text-align: center;
+  box-sizing: border-box;
+  user-select: none;
+}
+.active {
+  border: 2px solid red;
+}
 

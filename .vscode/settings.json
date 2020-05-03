@@ -1,13 +1,17 @@
 {
-    "files.associations": {
-        "*.vue": "vue"
-    },
+    // "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "editor.formatOnSave": true,
     "emmet.includeLanguages": {
         "vue": "html"
     },
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "vetur.format.defaultFormatter.js": "prettier-eslint",
+    "vetur.validation.template": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ]
 }

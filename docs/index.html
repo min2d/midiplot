@@ -1,4 +1,4 @@
-<html>
+<html lang="ja">
 
 <head>
   <meta charset="utf-8">
@@ -8,41 +8,27 @@
   <link href="./style.css" id="stylesheet" rel="stylesheet" type="text/css">
 </head>
 
-<body>
-  <section class="hero is-info is-fullheight" id="app">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="column is-8 is-offset-2">
-          <h1 class="title">
-            midi plotter
-          </h1>
-          <h2 class="subtitle">
-            midi plotter
-          </h2>
+<body class="has-background-info">
+  <section class="section" id="app">
+    <div class="container">
+      <div class="column">
+        <div class="row">
           <div class="box">
-            <div class="file">
-              <label class="file-label">
-                <input class="file-input" type="file" name="resume" accept="audio/midi" id="file-input"
-                  @input="fileChanged">
-                <span class="file-cta">
-                  <!-- <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span> -->
-                  <span class="file-label">
-                    Choose a file…
-                  </span>
-                </span>
-              </label>
-            </div>
+            <key-filter-form></key-filter-form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box">
+
             <div>
               <div class="field has-addons">
                 <div>1ページ</div>
                 <div class="control">
-                  <input class="input" type="number" v-model="beatsPerBar">
+                  <input class="input num-input" type="number" v-model.number="beatsPerBar">
                 </div>
-                <div>拍 ×</div>
+                <div>拍x</div>
                 <div class="control">
-                  <input class="input" type="number" v-model="barsPerPage">
+                  <input class="input num-input" type="number" v-model.number="barsPerPage">
                 </div>
                 <div>小節</div>
 
@@ -50,48 +36,94 @@
               <div class="field has-addons">
                 <div>アートボードサイズ(mm)</div>
                 <div class="control">
-                  <input class="input" type="number" v-model="pageWidth">
+                  <input class="input num-input" type="number" v-model.number="pageWidth">
                 </div>
-                <div>対象Track</div>
-                <div class="select">
-                  <select v-model="trackIndex">
-                    <option v-for="i in Object.keys(tracks)" :value="i">{{Number(i)+1}}</option>
-                  </select>
+                <div>
+                  x
                 </div>
-
                 <div class="control">
-                  <button class="button" @click="preview">preview</button>
+                  <input class="input num-input" type="number" v-model.number="pageHeight">
                 </div>
               </div>
-            </div>
+              <div class="flex" style="display: flex; justify-content: space-between;">
+                <div>
+                  ブロック高さ
+                  <input class="input num-input" type="number" v-model.number="blockHeight">
+                </div>
+                <div>
+                  ブロック間隔
+                  <input class="input num-input" type="number" v-model.number="blockInterval">
+                </div>
+                <div class="select">
+                  <select v-model.number="isMarginTopActive">
+                    <option value="1">上余白</option>
+                    <option value="0">下余白</option>
+                  </select>
+                </div>
+                <input class="input num-input" type="number" v-model.number="marginTopOrBottom">
+                <span v-if="!isMarginTopActive">上:{{marginTop}}</span>
+              </div>
+              <div class="flex" style="display: flex;">
+                <div class="flexitem">
+                  <div class="file">
+                    <label class="file-label">
+                      <input class="file-input" type="file" name="resume" accept="audio/midi" id="file-input"
+                        @input="fileChanged">
+                      <span class="file-cta">
+                        <span class="file-label">
+                          Choose a file…
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="flexitem">
+                  <div class="field has-addons">
+                    <div>対象Track</div>
+                    <div class="select">
+                      <select v-model="trackIndex">
+                        <option v-for="i in Object.keys(tracks)" :value="i">{{Number(i)+1}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <div>preview</div>
-              <canvas id="preview" width="500" height="300">preview area</canvas>
-            </div>
-
-            <div class="has-background-warning is-size-7">
-              <p>debug</p>
-              <p>
-                beatsPerPage:{{beatsPerPage}}
-              </p>
-              <p>
-                ticksPerPage:{{ticksPerPage}}
-              </p>
-              <p>
-                trackIndex:{{trackIndex}}
-              </p>
-              <p>
-                notes:{{notes}}
-              </p>
-              <p>
-                plots:{{plots}}
-              </p>
-              <p>
-                pagedPlots:{{pagedPlots}}
-              </p>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="box">
+            <div>
+              <button class="button" @click="downloadMainScript">main.jsxを保存</button>
+              実行用スクリプト(1回保存すればOK)
+            </div>
+            <div>
+              <button class="button" @click="downloadDataScript">data.jsxを保存</button>
+              データが入ったスクリプト(データを変更した場合は再度保存してください)
+            </div>
+            <p>
+              <b>実行方法</b><br>
+              1. main.jsxとdata.jsxを同じフォルダに入れる<br>
+              2. Illustratorのスクリプト実行でmain.jsxを選択<br>
+              ※1小節目の1拍目ぴったりは反映されないのでmidi側で調整してください
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="box">
+            <div>プレビュー(サイズは実際のものと異なります)</div>
+            <div v-for="(pPlots,i) in pagedPlots">
+              <Page :plots="pPlots" :num="i" :w="pageWidth" :h="pageHeight" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="has-background-warning is-size-7">
+          <p>debug</p>
+          <textarea name="" id="" style="width:100%;height:100px;" :value="JSON.stringify(pagedPlots)">
+          </textarea>
         </div>
       </div>
     </div>
