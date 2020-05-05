@@ -6,7 +6,7 @@
     list.push(i+1);
   }
 
-  var window= new Window ('dialog', 'listbox'); 
+  var window= new Window ('dialog', 'ページ選択'); 
   window.margins= 20;
   window.list= window.add('listbox', undefined, list, {multiselect: true});
   window.list.selection= 0;
