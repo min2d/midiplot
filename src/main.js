@@ -60,7 +60,6 @@ new Vue({
     },
     pagedPlots() {
       let pages = []
-      console.log(this.notes)
       this.notes.forEach(note => {
         const keyIndex = this.keyList.indexOf(note.noteNumber)
         if (keyIndex == -1) return

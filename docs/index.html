@@ -21,6 +21,9 @@
           <div class="box">
 
             <div>
+              <div>
+                単位はすべてミリメートルです
+              </div>
               <div class="field has-addons">
                 <div>1ページ</div>
                 <div class="control">
@@ -34,7 +37,7 @@
 
               </div>
               <div class="field has-addons">
-                <div>アートボードサイズ(mm)</div>
+                <div>アートボードサイズ</div>
                 <div class="control">
                   <input class="input num-input" type="number" v-model.number="pageWidth">
                 </div>
@@ -61,7 +64,7 @@
                   </select>
                 </div>
                 <input class="input num-input" type="number" v-model.number="marginTopOrBottom">
-                <span v-if="!isMarginTopActive">上:{{marginTop}}</span>
+                <span v-if="!isMarginTopActive">(上:{{marginTop}})</span>
               </div>
               <div class="flex" style="display: flex;">
                 <div class="flexitem">
