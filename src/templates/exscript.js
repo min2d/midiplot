@@ -1,5 +1,7 @@
 #include 'data.jsx';
 (function () {
+  // mmからpointに変換するための値
+  var mm = 2.834645;
 
   var list = [] 
   for(var i=0;i<pagedPlots.length; i++){
@@ -23,8 +25,8 @@
 
   var documentPreset = new DocumentPreset();
   documentPreset.units = RulerUnits.Millimeters;
-  documentPreset.width = w;
-  documentPreset.height = h;
+  documentPreset.width = w * mm;
+  documentPreset.height = h* mm;
   documentPreset.colorMode = DocumentColorSpace.CMYK;
 
   var color = new RGBColor();
@@ -34,13 +36,13 @@
 
   for (var i = 0; i < pageIndexes.length; i++) {
     var doc = app.documents.addDocument("", documentPreset, false);
-    doc.artboards[0].artboardRect = [0, 0, w, -h];
-    doc.views[0].centerPoint = [w / 2, -h / 2];
+    doc.artboards[0].artboardRect = [0, 0, w*mm, -h*mm];
+    doc.views[0].centerPoint = [w*mm / 2, -h*mm / 2];
 
     var plots = pagedPlots[pageIndexes[i]];
     for (var j = 0; j < plots.length; j++) {
       var plot = plots[j];
-      var rect = doc.pathItems.rectangle(-plot.y, plot.x, plot.w, plot.h);
+      var rect = doc.pathItems.rectangle(-plot.y*mm, plot.x*mm, plot.w*mm, plot.h*mm);
       // rect.fillColor = color;
       rect.Color = color;
     }
