@@ -57,16 +57,18 @@
                   ブロック間隔
                   <input class="input num-input" type="number" v-model.number="blockInterval">
                 </div>
-                <div class="select">
-                  <select v-model.number="isMarginTopActive">
-                    <option value="1">上余白</option>
-                    <option value="0">下余白</option>
-                  </select>
+                <div>
+                  <div class="select">
+                    <select v-model.number="isMarginTopActive">
+                      <option value="1">上余白</option>
+                      <option value="0">下余白</option>
+                    </select>
+                  </div>
+                  <input class="input num-input" type="number" v-model.number="marginTopOrBottom">
+                  <span v-if="!isMarginTopActive">(上:{{marginTop}})</span>
                 </div>
-                <input class="input num-input" type="number" v-model.number="marginTopOrBottom">
-                <span v-if="!isMarginTopActive">(上:{{marginTop}})</span>
               </div>
-              <div class="flex" style="display: flex;">
+              <div class="flex" style="display: flex;padding-top: 10px;">
                 <div class="flexitem">
                   <div class="file">
                     <label class="file-label">

@@ -116,7 +116,6 @@ new Vue({
       reader.readAsBinaryString(e.target.files[0])
     },
     downloadMainScript() {
-      if (this.pagedPlots.length < 1) return;
       let blob = new Blob([exscript])
       let link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
