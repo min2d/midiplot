@@ -43,8 +43,8 @@
     for (var j = 0; j < plots.length; j++) {
       var plot = plots[j];
       var rect = doc.pathItems.rectangle(-plot.y*mm, plot.x*mm, plot.w*mm, plot.h*mm);
-      // rect.fillColor = color;
       rect.Color = color;
+      rect.filled = false;
     }
   }
   redraw();
