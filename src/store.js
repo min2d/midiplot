@@ -20,5 +20,5 @@ export default new Vuex.Store({
       state.keyList = list
     }
   },
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({key:'midiplot'})],
 })
