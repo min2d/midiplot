@@ -101,7 +101,11 @@
           <div class="box">
             <div>
               <button class="button" @click="downloadMainScript">main.jsxを保存</button>
-              実行用スクリプト(1回保存すればOK)
+              実行用スクリプト(ドキュメント分けver、1ページ1ドキュメントに出力されます)
+            </div>
+            <div>
+              <button class="button" @click="downloadMainScriptLayer">main.jsxを保存</button>
+              実行用スクリプト(レイヤー分けver、1つのドキュメントにまとめて出力されます)
             </div>
             <div>
               <button class="button" @click="downloadDataScript">data.jsxを保存</button>

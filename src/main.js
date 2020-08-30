@@ -7,6 +7,7 @@ const Page = require('./components/page.vue').default
 const KeyFilterForm = require('./components/keyFilterForm.vue').default
 
 const exscript = require('raw-loader!./templates/exscript.js').default
+const exscriptLayer = require('raw-loader!./templates/exscriptLayer.js').default
 
 Vue.use(Vuex)
 const store = require('./store').default
@@ -116,21 +117,22 @@ new Vue({
       reader.readAsBinaryString(e.target.files[0])
     },
     downloadMainScript() {
-      let blob = new Blob([exscript])
-      let link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      link.download = 'main.jsx'
-      link.click()
-      link.remove()
+      this.download(exscript, 'main.jsx')
+    },
+    downloadMainScriptLayer() {
+      this.download(exscriptLayer, 'main.jsx')
     },
     downloadDataScript() {
       if (this.pagedPlots.length < 1) return;
-      let blob = new Blob([this.outputScript])
+      this.download(this.outputScript, 'data.jsx')
+    },
+    download(text, name) {
+      let blob = new Blob([text])
       let link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      link.download = 'data.jsx'
+      link.download = name
       link.click()
       link.remove()
-    },
+    }
   }
 })
